@@ -75,4 +75,4 @@ The NeuroPredict system includes a user-friendly web application for clinicians 
 The NeuroPredict system achieves an 80% accuracy rate in predicting AD using MRI images, offering a reliable solution for early diagnosis. The combination of CNN models, EDA insights, and innovative hardware and web applications addresses the critical need for early prediction and personalized care in AD.
 
 
-For more information, please visit our [conference paper](https://ieeexplore.ieee.org/document/979-8-3503-0692-7).
+For more information, please visit our [conference paper](https://ieeexplore.ieee.org/document/10419914).
