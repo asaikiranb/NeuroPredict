@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuroPredict - Prediction Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: "Geologica", Arial, sans-serif;
+      background-color: #fdfddc; /* Light yellow background color */
+      margin: 0;
+      padding: 0;
+      color: #333; /* Dark text color */
+    }
+    header {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 36px; /* Increased font size */
+      margin: 0;
+    }
+
+    section {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff; /* White background color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #1D1D1D; /* Black text color */
+      font-size: 24px;
+    }
+
+    footer {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */      padding: 3px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 14px; /* Reduced font size for footer */
+    }
+
+    .container {
+      display: flex; /* Use flexbox */
+    }
+
+    .compartment {
+      flex: 1; /* Distribute equal width to both compartments */
+      padding: 20px; /* Optional: Add padding for spacing */
+    }
+    button {
+      background-color: #172bdf;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #myButton{
+      background-color: blue;
+    }
+
+ 
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Outcome of Prediction</h1>
+  </header>
+
+
+  <section>
+    <h2>Prediction Results</h2>
+    <div class="container">
+      
+      <div class="compartment">
+        <div id="prediction">
+
+        </div>
+      </div>
+      <div class="compartment">
+        <canvas id="predictionChart"></canvas>
+      </div>
+
+    </div>
+    <div class="compartment" >
+      <img src="" id="imageElement">
+      <div id="result-div" >
+
+      </div>
+    </div>
+    
+    <div class="compartment">
+      <button id="myButton" style="display: none;" onclick="redirectDeviceInfo()">MemorEYEs</button>
+    </div>
+  </section>
+
+
+
+
+  <footer id="footer">
+    <p>&copy; 2023 NeuroPredict. All rights reserved.</p>
+  </footer>
+
+  <script>
+
+
+
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var jsonData = urlParams.get('data');
+    
+    var image = localStorage.getItem('imageData');
+
+// Use the image data as needed
+    document.getElementById('imageElement').src = image;
+
+    var data = JSON.parse(jsonData); 
+    var predictionArray = data.prediction[0];
+
+    var highest_val = Math.max(...predictionArray)
+    console.log(highest_val)
+
+    
+    console.log(predictionArray)
+    
+
+    // Display the predicted output
+    var predictionElement = document.getElementById('prediction');
+    for (var i = 0; i < predictionArray.length; i++) {
+      var label = 'Class ' + (i + 1);
+      var value = predictionArray[i] * 100;
+      if(predictionArray[i] == highest_val){
+        var highest_label = label
+        var result_text
+        if(label == 'Class 3'){
+          result_text = "NON-DEMENTED"
+
+        }
+        else if(label == "Class 4"){
+          result_text = "DEMENTED"
+          
+        }
+        
+        result_info(result_text)
+        showButton(highest_label)
+      }
+      var predictionItem = document.createElement('p');
+      
+      predictionItem.innerHTML =  label + ': ' +  '<b>' + value.toFixed(2) + '%</b>';
+      predictionElement.appendChild(predictionItem);
+    }
+
+    var chartCanvas = document.getElementById('predictionChart');
+
+// Create the chart
+    var chart = new Chart(chartCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Class 1', 'Class 2', 'Class 3', 'Class 4'],
+        datasets: [{
+          label: 'Prediction',
+          data: predictionArray,
+          backgroundColor: 'rgba(95, 179, 69, 1)', // Set the bar color
+          borderWidth: 1 // Set the border width
+        }]
+      },
+      options: {
+        responsive: true, // Make the chart responsive
+        scales: {
+          y: {
+            beginAtZero: true, // Start the y-axis at 0
+            max: 1, // Set the maximum value of the y-axis
+            ticks: {
+              precision: 2 // Set the number of decimal places for tick labels
+            }
+          },
+          x: {
+            barPercentage: 0.4, // Adjust the bar width (0.6 means 60% of the available space)
+            categoryPercentage: 0.6 // Adjust the category width (0.6 means 60% of the available space)
+          }
+        } 
+      }
+    });
+
+    function result_info(result_text){
+      var resultElement = document.getElementById('result-div');
+      var resutlItem = document.createElement('p');
+      resutlItem.innerHTML =  '<b>' + 'Conclusion : ' + '</b>' + result_text;
+      resultElement.appendChild(resutlItem)
+
+
+    }
+
+    function redirectDeviceInfo(){
+      window.location.href = "/device-info";
+    }
+
+    
+
+
+    function showButton(label) {
+       // Set your condition here
+      
+      if (label == 'Class 4') {
+        document.getElementById('myButton').style.display = 'block'; // Show the button
+      } else {
+        document.getElementById('myButton').style.display = 'none'; // Hide the button
+      }
+    }
+
+    
+    
+
+
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuroPredict - Alzheimer's Disease Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica&display=swap" rel="stylesheet">
+  <style>
+
+
+    body {
+      font-family: "Geologica", Arial, sans-serif;
+      background-color: #fdfddc; /* Light yellow background color */
+      margin: 0;
+      padding: 0;
+      color: #333; /* Dark text color */
+      
+    }
+    header {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 36px; /* Increased font size */
+      margin: 0;
+    }
+
+    section {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff; /* White background color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #1D1D1D; /* Black text color */
+      font-size: 24px;
+    }
+    input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */
+      padding: 3px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 14px; /* Reduced font size for footer */
+    }
+
+    form input[type="file"] {
+      display: block;
+      margin: 10px 0;
+    }
+
+
+    input[type="submit"],
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover,
+    button:hover {
+      background-color: #45a049;
+    }
+
+
+    button[type="button"] {
+      background-color: #f44336;
+    }
+    
+    button[type="button"]:hover {
+      background-color: #d32f2f;
+    
+    }
+
+
+
+    #loading-icon {
+        display: none;
+        width: 50px;
+        height: 50px;
+        margin: 20px auto;
+        border-radius: 50%;
+        border: 5px solid #ccc;
+        border-top-color: #4CAF50;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        0% {
+        transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    #more-info-btn {
+      background-color: blue;
+  /* Add more styles here */
+    }
+
+
+ 
+  
+
+
+  </style>
+</head>
+
+
+
+<body>
+  <header>
+    <h1>NeuroPredict</h1>
+    <p>Predicting Alzheimer's Disease</p>
+  </header>
+  <section>
+    <h2>About Alzheimer's Disease</h2>
+    <p>
+      Alzheimer's disease is a progressive brain disorder that affects memory, thinking, and behavior. It is the most common cause of dementia, and early detection is crucial for better management of the condition.
+    </p>
+    <p>
+      Detecting Alzheimer's disease at an early stage allows for timely interventions and treatments that can slow down its progression and improve the quality of life for the affected individuals. Early diagnosis also provides an opportunity for patients and their families to plan and make informed decisions about their care and support.
+    </p>
+  </section>
+  <section>
+    <h2>About NeuroPredict</h2>
+    
+    <p>Dataset: The dataset used for this project is a collection of brain MRIs. The dataset consists of 6400 images, which are divided into four classes: normal, very-mild, mild, and moderate Alzheimer. The images in each class are of varying sizes, poses, and imaging protocols.</p>
+    <p>Model: The model used for this project is a convolutional neural network (CNN). CNNs are a type of deep learning model that are well-suited for image classification tasks. The CNN model used for this project was trained on a large dataset of brain MRIs.</p>
+    <p>Number of Images: The number of images in the dataset is 6400. The images are divided into 4000 training images and 2400 test images.</p>
+    <p>Classes of Images: The dataset contains four classes of images: normal, very-mild, mild, and moderate Alzheimer. The images in each class are of varying sizes, poses, and imaging protocols.</p>
+    <button type="menu" id="more-info-btn" onclick="redirectInfo()">More information</button>
+  </section>
+  <section>
+    <h2>Upload MRI Image</h2>
+
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+      <input type="file" name="image" id="image" accept="image/*" required onchange="previewImage(event)">
+      <br>
+      <img id="imagePreview" src="" >
+      <br>
+      <input type="submit" value="Submit" >
+      <button type="button" onclick="cancelUpload()">Cancel</button>
+      <br>
+      <br>
+      <div id="loading-icon"></div>
+    </form>
+  </section>
+  <section>
+    <h2>Team Behind the Project NeuroPredict</h2>
+    <p>Under the guidance of Dr. Remya Jayachandran</p>
+    <p>Members:</p>
+    <ul>
+      <li>Aniruddh Adiga</li>
+      <li>Annangi Saikiran Babu</li>
+      <li>KP Yashika</li>
+      <li>KS Nishaan Kushalappa</li>
+    </ul>
+  </section>
+  <br>
+  <br>
+  <br>
+
+  
+  <footer id="footer">
+    <p>&copy; 2023 NeuroPredict. All rights reserved.</p>
+  </footer>
+  <script>
+
+    window.addEventListener('scroll', function() {
+        var footer = document.getElementById('footer');
+        var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        var totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (scrollPosition === totalHeight) {
+            footer.style.display = 'block';
+        } else {
+            footer.style.display = 'none';
+        }
+    });
+
+    function redirectInfo(){
+      window.location.href = "/more-info";
+    }
+
+
+
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('imagePreview');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    
+    function cancelUpload() {
+      window.location.href = "/";
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e){
+
+        e.preventDefault();
+
+        var formData = new FormData();
+        var fileinput = document.getElementById('image');
+        formData.append('image',fileinput.files[0]);
+       
+        
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var imageData = event.target.result;
+            
+    // Store the image data in localStorage
+            localStorage.setItem('imageData', imageData);
+
+        }
+        reader.readAsDataURL(fileinput.files[0]);
+
+        showLoadingIcon(); // Show the loading icon
+        
+        sendImage(formData)
+        
+
+
+    })
+
+    function showLoadingIcon() {
+        var loadingIcon = document.getElementById('loading-icon');
+        loadingIcon.style.display = 'block';
+    }
+
+    function hideLoadingIcon() {
+        var loadingIcon = document.getElementById('loading-icon');
+        loadingIcon.style.display = 'none';
+    }
+
+
+    function sendImage(formData){
+        fetch('/predict',{
+            method : 'POST',
+            body : formData
+        })
+        .then(function(response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed.');
+        })
+        .then(function(data) {
+        // Handle the prediction response here
+            var jsonData = JSON.stringify(data)
+            var redirectUrl = 'info.html?data=' + encodeURIComponent(jsonData) ;
+
+            window.location.href = redirectUrl;
+
+        })
+        .catch(function(error) {
+        // Handle errors here
+            console.log(error);
+        });
+
+
+       
+        
+        
+    }
+
+
+  </script>
+</body>
+</html>

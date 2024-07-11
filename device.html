@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuroPredict - Prediction Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: "Geologica", Arial, sans-serif;
+      background-color: #fdfddc; /* Light yellow background color */
+      margin: 0;
+      padding: 0;
+      color: #333; /* Dark text color */
+    }
+    header {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 36px; /* Increased font size */
+      margin: 0;
+    }
+
+    section {
+      max-width: 940px;
+      margin: 20px auto;
+      background-color: #fff; /* White background color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #1D1D1D; /* Black text color */
+      font-size: 24px;
+    }
+
+    footer {
+      background-color: rgb(95, 179, 69); /* Light green background color */
+      color: #ffffff; /* Dark text color */      padding: 3px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 14px; /* Reduced font size for footer */
+    }
+    .indented-paragraph{
+      text-indent: 20px;
+    }
+    .image-container {
+      width: 30%;
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+        
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
+
+    
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Wearable device for assistance</h1>
+  </header>
+
+
+  <section>
+    <h2>MemorEYEs</h2>
+    <hr style="border: none; border-top: 1px solid #000;">
+    <div class="container">
+      <p>
+        "A Smart Wearable Device for Early and Mild Stage Alzheimer's Disease Patients"
+      </p>
+     
+
+
+      <p class="indented-paragraph">
+        MemorEYEs is an innovative smart wearable device designed exclusively to aid early and mild stage Alzheimer's disease (AD) patients. The device serves as a personal reminder system, medication tracker, and memory stimulator, providing essential support for patients and reducing the burden on caretakers. This report presents an overview of MemorEYEs, its key features, and the underlying technology used.
+
+
+      </p>
+      <br>
+      <br>
+      
+      <strong>Smart Spectacles:</strong><br>
+
+
+
+      <p class="indented-paragraph">
+       
+        The core component of MemorEYEs is a pair of smart spectacles equipped with an Arduino Nano microcontroller. The device utilizes a TFT LCD display to showcase pictures of the patients' loved ones. These images, stored in an SD card, are displayed on the glasses, enabling patients to recall and reconnect with their cherished memories.
+      </p>
+      <strong>Medication Reminder:</strong><br>
+
+      
+      <p class="indented-paragraph">
+       
+        MemorEYEs incorporates a medication reminder system to ensure patients take their prescribed medicines on time. The device sends timely notifications to patients, alerting them to adhere to their medication schedule. By promoting medication compliance, MemorEYEs helps manage the symptoms and progression of AD effectively.
+      </p>
+      <strong>Memory Stimulation:</strong><br>
+
+
+      <p class="indented-paragraph">
+  
+        To support memory retention, MemorEYEs regularly displays pictures of patients' loved ones. This feature aims to refresh the patients' memory and emotional connection with family members, reducing feelings of isolation and improving overall well-being. The device also provides information about the relationship the patient shares with the displayed person, aiding in memory recall.
+      </p>
+      <strong>GPS Tracking Wrist Band:</strong><br>
+      
+
+      <p class="indented-paragraph">
+        
+        Complementing the smart spectacles, MemorEYEs includes a wrist band powered by an ESP32 microcontroller. This wrist band serves as a GPS tracker, continuously monitoring the patient's location. If the patient crosses a predefined safe zone, the device immediately notifies the caretaker, providing real-time location updates and ensuring the patient's safety.
+      </p>
+      <br>
+      <div class="image-container">
+        <img src="{{ url_for('static', filename='images/specs.jpg') }}" alt="image1">
+        
+
+      </div>
+      <div class="image-container">
+        <img src="{{ url_for('static', filename='images/watch.jpg') }}" alt="image2">
+      </div>
+     
+      
+      <br>
+      <p class="indented-paragraph">
+        
+        In conclusion, MemorEYEs is an advanced wearable device designed to enhance the quality of life for early and mild stage AD patients. Its innovative features, including smart spectacles, medication reminders, memory stimulation, and GPS tracking, address the specific needs of AD patients while offering peace of mind to caretakers. The integration of technology and healthcare in MemorEYEs represents a significant step forward in supporting individuals with Alzheimer's disease and their caregivers.
+      </p>
+
+      
+    </div>
+    
+
+  </section>
+
+
+  <footer id="footer">
+    <p>&copy; 2023 NeuroPredict. All rights reserved.</p>
+  </footer>
+
+  <script>
+
+    window.addEventListener('scroll', function() {
+      var footer = document.getElementById('footer');
+      var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      var totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollPosition === totalHeight) {
+        footer.style.display = 'block';
+      } else {
+        footer.style.display = 'none';
+      }
+    });
+
+
+
+
+    
+
+
+  </script>
+
+
+</body>
+</html>
